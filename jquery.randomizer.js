@@ -68,8 +68,7 @@
                 $(value).css({
                     position: '',
                     top:      '',
-                    left:     '',
-                    display:  ''
+                    left:     ''
                 });
             });
         },
@@ -140,8 +139,9 @@
         _onError: function (current)
         {
             $(current).css({
-                top:  '-9999px',
-                left: '-9999px'
+                position: 'absolute',
+                top:      '-9999px',
+                left:     '-9999px'
             });
             this.options.onError(current);
         },

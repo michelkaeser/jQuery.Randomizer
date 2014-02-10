@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en">
+<head>
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>jQuery.Randomizer</title>
+    <style>
+    html, body { height: 100% }
+    body { position: relative }
+    .js-random {
+        width: 75px;
+        height: 75px;
+        background-color: aqua;
+        border-radius: 100%;
+    }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+
+<body>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+    <div class="js-random"></div>
+
+    <script src="jquery.randomizer.js"></script>
+    <script>
+    $('body').randomizer({
+        randoms:    $('.js-random'),
+        collisions: $('.js-random'),
+        spacing:    75,
+        tries:      1000,
+        delay:      350,
+        onError:   function (element)
+        {
+            console.log("Unable to find free area for element");
+            console.log(element);
+        }
+    });
+    </script>
+</body>
+</html>
