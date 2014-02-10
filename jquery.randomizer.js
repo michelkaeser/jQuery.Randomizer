@@ -43,6 +43,7 @@
 
             $(window).bind('resizeEnd', function()
             {
+                $this._onResize();
                 $this._position();
             });
 
@@ -145,6 +146,11 @@
             this.options.onError(current);
         },
 
+        _onResize: function ()
+        {
+            this.options.onResize();
+        },
+
         _onSuccess: function (current)
         {
             this.options.onSuccess(current);
@@ -203,6 +209,10 @@
         onError:    function (current)
         {
             $(current).hide();
+        },
+        onResize:  function ()
+        {
+            //
         },
         onSuccess: function (current)
         {

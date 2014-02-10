@@ -1,5 +1,7 @@
 {
     "name": "jquery.randomizer",
+    "description": "A jQuery plugin that randomly places elements (incl. overlap prevention).",
+    "keywords": ["jquery", "random", "positioning", "randomizer", "plugin", "puzzle"],
     "version": "0.1.0",
     "main": "dist/jquery.randomizer.min.js",
     "dependencies": {
