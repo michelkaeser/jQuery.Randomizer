@@ -4,5 +4,5 @@
     "main": "dist/jquery.randomizer.min.js",
     "dependencies": {
         "jquery": ">=1.3",
-    },
+    }
 }
