@@ -1,0 +1,8 @@
+{
+    "name": "jquery.randomizer",
+    "version": "0.1.0",
+    "main": "dist/jquery.randomizer.min.js",
+    "dependencies": {
+        "jquery": ">=1.3",
+    },
+}
