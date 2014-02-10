@@ -43,6 +43,7 @@
 
             $(window).bind('resizeEnd', function()
             {
+                $this._onResize();
                 $this._position();
             });
 
@@ -99,12 +100,8 @@
                 origin = this._getCoordinates(width, height);
             }
 
-            if ($this.recursionDeep == $this.options.tries) {
-                $this._onError($this.current);
-            } else if ($this.recursionDeep !== 0) {
+            if ($this.recursionDeep !== 0) {
                 --$this.recursionDeep;
-            } else {
-                $this._onSuccess($this.current);
             }
 
             return origin;
@@ -142,7 +139,23 @@
 
         _onError: function (current)
         {
+            $(current).css({
+                top:  '-9999px',
+                left: '-9999px'
+            });
             this.options.onError(current);
+        },
+
+        _onResize: function ()
+        {
+            $.each(this.options.randoms, function (index, value) {
+                var self = $(value);
+                self.css({
+                    top:  '-9999px',
+                    left: '-9999px'
+                });
+            });
+            this.options.onResize();
         },
 
         _onSuccess: function (current)
@@ -156,14 +169,30 @@
             $.each($this.options.randoms, function (index, value)
             {
                 var random    = $(value);
+                var width     = random.outerWidth();
+                var height    = random.outerHeight();
+
                 $this.current = value;
                 random.addClass('js-gets-positioned');
-                var coordinates = $this._getCoordinates(random.outerWidth(), random.outerHeight());
-                random.css({
-                    position: 'absolute',
-                    left:     coordinates.x,
-                    top:      coordinates.y
-                });
+                var origin    = $this._getCoordinates(width, height);
+
+                if ($this._isIsolated({
+                    p1: origin,
+                    p2: {
+                        x: origin.x + width,
+                        y: origin.y + height
+                    }
+                })) {
+                    random.css({
+                        position: 'absolute',
+                        left:     origin.x,
+                        top:      origin.y
+                    });
+                    $this._onSuccess(random);
+                } else {
+                    $this._onError(random);
+                }
+
                 random.removeClass('js-gets-positioned');
                 $this.current = null;
             });
@@ -202,7 +231,11 @@
         delay:      500,          // the resize end delay
         onError:    function (current)
         {
-            $(current).hide();
+            //
+        },
+        onResize:  function ()
+        {
+            //
         },
         onSuccess: function (current)
         {
