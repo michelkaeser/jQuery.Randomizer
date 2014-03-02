@@ -209,7 +209,7 @@
                 }
             });
         } else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
-            if (Array.prototype.slice.call(args, 1).length == 0 && $.inArray(options, $.fn[pluginName].getters) !== -1) {
+            if (Array.prototype.slice.call(args, 1).length === 0 && $.inArray(options, $.fn[pluginName].getters) !== -1) {
                 var instance = $.data(this[0], 'plugin_' + pluginName);
                 return instance[options].apply(instance, Array.prototype.slice.call(args, 1));
             } else {
